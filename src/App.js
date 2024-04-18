@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import Chats from './componants/Chats';
+import Details from './componants/Details';
+import List from './componants/List';
+
 
 function App() {
   return (
+    // <div className="App">
+    //   <div className="row">
+    //     <div className="col-md-3"><List /></div>
+
+    //     <div className="col-md-6 item-2"><Chats /></div>
+
+    //     <div className="col-md-3 item-3"><Details /></div>
+    //   </div>
+    // </div>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="d-flex">
+        <div className="item-1"><List /></div>
+        <div className="item-2"><Chats /></div>
+        <div className="item-3"><Details /></div>
+      </div>
     </div>
   );
 }
