@@ -30,22 +30,25 @@ function Chats() {
           <img srcSet={avatarImage} className='msg-avatar-img m-2' alt="" />
           <div className="msg-text mx-2">
             <p className='msg-text-p'>HEllo dsfdsmf skdbhdshjbds hg dusuhdsyudsfhdsbfjhsbdjfvsdgjfvdgsvfgsvfghsd su fdgsf gsdf dgsjf gs gfjds</p>
-            <span className='msg-timestamp'>1 min ago</span></div>
+            <span className='msg-timestamp'>1 min ago</span>
+          </div>
         </div>
         <div className="msg own">
           <div className="msg-text mx-2">
             <img srcSet={msg_img} alt='' className='msg-img' />
             <p className='msg-text-p'>My msgsdgj sn eigsdhbgsdhb gihdsbg idsg bdskgbk</p>
-            <span className='msg-timestamp'>1 min ago</span></div>
+            <span className='msg-timestamp'>1 min ago</span>
+          </div>
         </div>
-        
+
         <div className="msg">
           <img srcSet={avatarImage} className='msg-avatar-img m-2' alt="" />
           <div className="msg-text mx-2">
             <p className='msg-text-p'>HEllo</p>
-            <span className='msg-timestamp'>1 min ago</span></div>
+            <span className='msg-timestamp'>1 min ago</span>
+          </div>
         </div>
-        
+
       </div>
       <div className="bottom-level pt-2">
         <div className="m-3 d-flex align-items-center position-relative">

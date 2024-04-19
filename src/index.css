@@ -73,11 +73,11 @@ body{
 }
 .item-2{
   border-left: 1px solid rgb(136, 136, 136);
-  width: 50%;
+  width: 52%;
 }
 .item-3{
   border-left: 1px solid rgb(136, 136, 136);
-  width: 27%;
+  width: 25%;
 }
 p{
  margin: 0 0 0 0; 
@@ -111,7 +111,7 @@ i:hover{
   background-color: rgba(0, 0, 0, 0.56);
   border-radius: 10px;
   height: 40px;
-  width: 450px;
+  width: 480px;
 }
 .last-item{
   position: absolute;
@@ -144,6 +144,7 @@ i:hover{
 }
 .msg-text-p{
   font-size: 14px;
+  /* border: 1px solid rgb(136, 136, 136); */
 }
 .mid-level{
   padding: 20px;
@@ -169,7 +170,7 @@ i:hover{
     align-self: flex-end !important;
     p{
       padding: 10px;
-      background-color: rgba(0, 0, 255, 0.568);
+      background-color: rgb(30, 0, 151);
       border-radius: 10px;
     }
   }
@@ -185,4 +186,52 @@ i:hover{
   padding: 10px;
   border-radius: 15px;
   object-fit: cover;
+}
+.details-chat-avatar{
+  width: 120px;
+  height: 120px;
+  background-color: black;
+  border-radius: 50%;
+}
+.detail-top{
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgb(136, 136, 136);;
+}
+.detail-bottom {
+  max-height: 410px;
+  overflow-y: scroll;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  position: relative;
+  height: 420px;
+}
+.detail-option-text{
+  font-size: 17px;
+}
+.detail-shared-pic{
+  width: 30px;
+  height: 30px;
+  background-color: aqua;
+  border-radius: 5px;
+}
+.photo-item{
+  margin-top:10px;
+}
+.img-name{
+  font-size: 13px;
+}
+.download-icons{
+  background-color: transparent;
+}
+.photos{
+  max-height: 115px; 
+  overflow-y: scroll;
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+.buttons{
+  position: absolute;
+  bottom: 0px;
+  width: 90%;
+  /* bottom: 0px; */ 
 }
