@@ -1,14 +1,18 @@
 import React from 'react'
 import { useState } from 'react';
 import avatarImage from '../images/avatar3.png';
+import AddUser from '../componants/Adduser';
 
 function ChatList() {
     const [addMode, setMode] = useState(false);
     const onAddClick = () => {
-        if (addMode)
+        if (addMode){
             setMode(false);
+        }
         else if (addMode === false)
+        {
             setMode(true);
+        }    
     }
     return (
         <>
@@ -93,7 +97,7 @@ function ChatList() {
                         </div>
                     </div>
                 </div>
-                
+                {addMode && <AddUser/>}
             </div>
         </>
     )

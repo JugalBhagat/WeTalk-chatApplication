@@ -28,7 +28,14 @@ body {
   backdrop-filter: blur(19px) saturate(180%);
   border-radius: 10px;
   color: white;
-  /* overflow-y: scroll; */
+  overflow-y: hidden
+}
+.modal{
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  bottom: 30%;
+  right: 30%;
 }
 
 .componant-1 {
@@ -315,15 +322,15 @@ i:hover {
 .separator {
   /* Add spacing between the signup and login items */
   width: 1px;
-  height: 90vh;
+  height:75%;
   /* Adjust as needed */
   background-color: rgb(136, 136, 136);
   /* Example color */
 }
 
 .selected-img-signup {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
 }
 .form-control:focus{
@@ -331,4 +338,31 @@ i:hover {
   color: white;
   border: 0px;
   box-shadow: none;
+}
+.add-user{
+  padding: 50px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.845);
+  z-index: 1;
+  position: absolute;
+  top:10%;
+  bottom: 30%;
+  right: 35%;
+  left: 35%;
+  height: 500px;
+  width: 400px;
+}
+.adduser-form{
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgb(136, 136, 136);
+}
+.search-results{
+  max-height: 350px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.form-control-add:focus{
+  background-color: white;
+  color: black;
 }

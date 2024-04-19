@@ -3,10 +3,11 @@ import Chats from './componants/Chats';
 import Details from './componants/Details';
 import List from './componants/List';
 import Signup from './componants/signup';
+import Notification from './componants/notification';
 
 
 function App() {
-  const user = false;
+  const user = true;
   return (
     <div className="App">
       <div className="d-flex">
@@ -19,6 +20,7 @@ function App() {
           (
               <Signup/>
           )}
+          <Notification/>
       </div>
     </div>
   );
