@@ -9,9 +9,9 @@ function UserInfo() {
                 <h4>Jugal bhagat</h4>
             </div>
             {/* <div className="icon mx-3">
-                <i class="fa-solid fa-video mx-2"></i>
-                <i class="fa-solid fa-ellipsis mx-2"></i>
-                <i class="fa-solid fa-pen-to-square mx-2"></i>
+                <i className="fa-solid fa-video mx-2"></i>
+                <i className="fa-solid fa-ellipsis mx-2"></i>
+                <i className="fa-solid fa-pen-to-square mx-2"></i>
             </div> */}
         </div>
     );

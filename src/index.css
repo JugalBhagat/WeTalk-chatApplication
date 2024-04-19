@@ -11,227 +11,324 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-body{
+
+body {
   background-image: url(images/bg.jpg);
   background-size: 100%;
   display: flex;
   justify-content: center;
-  height:100vh;
+  height: 100vh;
   align-items: center;
 }
-.App{
+
+.App {
   width: 90vw;
   height: 90vh;
-  background-color:rgba(0, 0, 0, 0.604);
+  background-color: rgba(0, 0, 0, 0.604);
   backdrop-filter: blur(19px) saturate(180%);
   border-radius: 10px;
   color: white;
   /* overflow-y: scroll; */
 }
-.componant-1{
+
+.componant-1 {
   height: 457px;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
   overflow-y: auto;
 }
-.user-avatar{
+
+.user-avatar {
   width: 50px;
   height: 50px;
-  border-radius:50%;
+  border-radius: 50%;
 }
-.chat-avatar{
+
+.chat-avatar {
   background-color: aliceblue;
   width: 40px;
   height: 40px;
-  border-radius:50%;
+  border-radius: 50%;
 }
-.my-serach{
+
+.my-serach {
   background-color: transparent;
   border: none;
   outline: none;
   color: white;
 }
-.my-serachbar{
+
+.my-serachbar {
   background-color: rgba(0, 0, 0, 0.56);
   border-radius: 10px;
   height: 35px;
   width: 200px;
 }
+
 .btn-add-chats:hover {
   cursor: pointer;
 }
-.my-chat-item{
+
+.my-chat-item {
   border-bottom: 1px solid rgb(136, 136, 136);
 }
-.my-chat-item-top{
+
+.my-chat-item-top {
   border-bottom: 1px solid rgb(136, 136, 136);
   border-top: 1px solid rgb(136, 136, 136);
 }
-.item-1{
+
+.item-1 {
   border-left: 1px solid rgb(136, 136, 136);
   width: 23%;
 }
-.item-2{
+
+.item-2 {
   border-left: 1px solid rgb(136, 136, 136);
   width: 52%;
 }
-.item-3{
+
+.item-3 {
   border-left: 1px solid rgb(136, 136, 136);
   width: 25%;
 }
-p{
- margin: 0 0 0 0; 
+
+p {
+  margin: 0 0 0 0;
 }
-i:hover{
+
+i:hover {
   cursor: pointer;
 }
-.top-chat-img{
+
+.top-chat-img {
   width: 60px;
   height: 60px;
   background-color: white;
   border-radius: 50%;
 }
+
 .chat-item-icons {
   /* position: fixed; */
   top: 0;
   right: 0;
 }
-.top-level{
+
+.top-level {
   /* position: relative; */
   border-bottom: 1px solid rgb(136, 136, 136);
 }
-.txt-my-chat{
+
+.txt-my-chat {
   background-color: transparent;
   border: none;
   width: 400px;
   outline: none;
   color: white;
 }
-.my-input-box{
+
+.my-input-box {
   background-color: rgba(0, 0, 0, 0.56);
   border-radius: 10px;
   height: 40px;
   width: 480px;
 }
-.last-item{
+
+.last-item {
   position: absolute;
   right: 5px;
 }
-.mid-level{
+
+.mid-level {
   height: 450px;
   border-bottom: 1px solid rgb(136, 136, 136);
 }
-.bottom-level{
+
+.bottom-level {
   position: relative;
 }
-.icons{
+
+.icons {
   position: relative;
-  .emoji-container{
+
+  .emoji-container {
     position: absolute;
     bottom: 45px;
   }
 }
 
-.msg-avatar-img{
+.msg-avatar-img {
   width: 25px;
   height: 25px;
   background-color: white;
   border-radius: 50%;
 }
-.msg-timestamp{
+
+.msg-timestamp {
   font-size: 12px;
   padding: 0 0 0 0;
 }
-.msg-text-p{
+
+.msg-text-p {
   font-size: 14px;
   /* border: 1px solid rgb(136, 136, 136); */
 }
-.mid-level{
+
+.mid-level {
   padding: 20px;
   flex: 1;
   overflow-y: scroll;
-  -ms-overflow-style: none; 
-  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   display: flex;
   flex-direction: column;
-  gap:10px;
+  gap: 10px;
 
-  .msg{
+  .msg {
     max-width: 70%;
     display: flex;
     gap: 10px;
-    p{
+
+    p {
       padding: 10px;
       background-color: rgba(0, 0, 25, 0.334);
       border-radius: 10px;
     }
   }
-  .own{
+
+  .own {
     align-self: flex-end !important;
-    p{
+
+    p {
       padding: 10px;
-      background-color: rgb(30, 0, 151);
+      background-color: #007bffa9;
       border-radius: 10px;
     }
   }
 }
-.btn-add{
+
+.btn-add {
   background-color: rgba(0, 0, 0, 0.56);
   border-radius: 10px;
   padding: 10px;
 }
-.msg-img{
+
+.msg-img {
   height: 200px;
   width: 100%;
   padding: 10px;
   border-radius: 15px;
   object-fit: cover;
 }
-.details-chat-avatar{
+
+.details-chat-avatar {
   width: 120px;
   height: 120px;
   background-color: black;
   border-radius: 50%;
 }
-.detail-top{
+
+.detail-top {
   padding-bottom: 15px;
-  border-bottom: 1px solid rgb(136, 136, 136);;
+  border-bottom: 1px solid rgb(136, 136, 136);
 }
+
 .detail-bottom {
   max-height: 410px;
   overflow-y: scroll;
-  scrollbar-width: none; 
+  scrollbar-width: none;
   -ms-overflow-style: none;
   position: relative;
   height: 420px;
 }
-.detail-option-text{
+
+.detail-option-text {
   font-size: 17px;
 }
-.detail-shared-pic{
+
+.detail-shared-pic {
   width: 30px;
   height: 30px;
-  background-color: aqua;
+  background-color: rgb(255, 255, 255);
   border-radius: 5px;
 }
-.photo-item{
-  margin-top:10px;
+
+.photo-item {
+  margin-top: 10px;
 }
-.img-name{
+
+.img-name {
   font-size: 13px;
 }
-.download-icons{
+
+.download-icons {
   background-color: transparent;
 }
-.photos{
-  max-height: 115px; 
+
+.photos {
+  max-height: 115px;
   overflow-y: scroll;
-  scrollbar-width: none; 
-  -ms-overflow-style: none; 
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-.buttons{
+
+.buttons {
   position: absolute;
   bottom: 0px;
   width: 90%;
-  /* bottom: 0px; */ 
+  /* bottom: 0px; */
+}
+
+.signup-class {
+  min-height: 90vh;
+  width: 100%;
+}
+
+.signup-item,
+.login-item {
+  width: 50% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.my-signup-input {
+  background-color: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  width: 280px;
+  height: 35px;
+}
+
+.my-signup-input-box {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.56);
+  border-radius: 10px;
+  width: 300px;
+}
+
+.separator {
+  /* Add spacing between the signup and login items */
+  width: 1px;
+  height: 90vh;
+  /* Adjust as needed */
+  background-color: rgb(136, 136, 136);
+  /* Example color */
+}
+
+.selected-img-signup {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.form-control:focus{
+  background-color: transparent;
+  color: white;
+  border: 0px;
+  box-shadow: none;
 }

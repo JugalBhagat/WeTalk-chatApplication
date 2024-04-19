@@ -14,7 +14,7 @@ function ChatList() {
         <>
             <div className='d-flex align-items-center mx-4'>
                 <div className="top-bar d-flex mx-1 my-serachbar align-items-center">
-                    <i class="fa-solid fa-magnifying-glass mx-2"></i>
+                    <i className="fa-solid fa-magnifying-glass mx-2"></i>
                     <input type='text' name='txt_search' className="my-serach" />
                 </div>
                 <i className={`fa-solid btn-add ${addMode ? 'fa-minus' : 'fa-plus'} mx-2 btn-add-chats`} onClick={onAddClick}></i>

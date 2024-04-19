@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import avatarImage from '../images/avatar3.png';
 import SharedImage from '../images/bg.jpg';
 
@@ -7,8 +7,8 @@ function Details() {
   const [sharedFiles, setSharedFiles] = useState(false);
   const [ChatSetting, setChatSetting] = useState(false);
 
-  const showSharedImage=()=>{
-    setSharedImage((prev)=>!prev);
+  const showSharedImage = () => {
+    setSharedImage((prev) => !prev);
   }
   return (
     <div className="">
@@ -27,7 +27,7 @@ function Details() {
         <div className="option m-2 mt-4">        {/* Chat Setting */}
           <div className="d-flex mx-3  justify-content-between align-items-center">
             <span className='detail-option-text'>Chat setting</span>
-            <i className={`fa-solid fa-lg download-icons ${ChatSetting ? 'fa-circle-chevron-up' : 'fa-circle-chevron-down'}`} onClick={()=>setChatSetting((prev)=>!prev)}></i>
+            <i className={`fa-solid fa-lg download-icons ${ChatSetting ? 'fa-circle-chevron-up' : 'fa-circle-chevron-down'}`} onClick={() => setChatSetting((prev) => !prev)}></i>
           </div>
         </div>
 
@@ -35,7 +35,7 @@ function Details() {
         <div className="option m-2 mt-4">        {/* Shared Files */}
           <div className="d-flex mx-3  justify-content-between align-items-center">
             <span className='detail-option-text'>Shared Files</span>
-            <i className={`fa-solid fa-lg download-icons ${sharedFiles ? 'fa-circle-chevron-up' : 'fa-circle-chevron-down'}`} onClick={()=>setSharedFiles((prev)=>!prev)}></i>
+            <i className={`fa-solid fa-lg download-icons ${sharedFiles ? 'fa-circle-chevron-up' : 'fa-circle-chevron-down'}`} onClick={() => setSharedFiles((prev) => !prev)}></i>
           </div>
         </div>
 
@@ -49,7 +49,7 @@ function Details() {
             <div className="photo-item d-flex align-items-center justify-content-between ">
               <div className="photo-detail">
                 <img srcSet={SharedImage} alt="Chat Avatar" className='detail-shared-pic ' />
-                <span className='img-name mx-3'>photo1_2.jpg</span>
+                <span className='img-name mx-3'>photo1_1.jpg</span>
               </div>
               <i className="fa-solid  fa-download"></i>
             </div>
@@ -64,18 +64,11 @@ function Details() {
         </div>
 
 
-        <div className="option m-2 mt-4">        {/* privacy policy */}
-          <div className="d-flex mx-3  justify-content-between align-items-center">
-            <span className='detail-option-text'>Privacy Policy</span>
-            <i className="fa-solid fa-lg fa-circle-chevron-down "></i>
-          </div>
-        </div>
-
-
         <div className="buttons mt-4 m-3">       {/* Block Button */}
-        <div class="d-grid gap-2 m-2">
-          <button class="btn btn-danger" type="button">Block User</button>
-        </div>
+          <div className="d-grid gap-2 m-2">
+            <button className="btn btn-danger" type="button">Block User</button>
+            <button className="btn btn-danger" type="button">Logout</button>
+          </div>
         </div>
 
       </div>
