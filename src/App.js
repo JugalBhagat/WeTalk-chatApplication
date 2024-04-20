@@ -1,28 +1,57 @@
 import './App.css';
 import Chats from './componants/Chats';
+import React, { useEffect, useState } from 'react';
 import Details from './componants/Details';
 import List from './componants/List';
 import Signup from './componants/signup';
 import Notification from './componants/notification';
-
+import LoadingBar from 'react-top-loading-bar'
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './lib/firebase';
+import useUserStore from './lib/userStore';
+import loading from './componants/loading.gif';
 
 function App() {
-  const user = false;
+  const [progress, setProgress] = useState(0);
+
+  const { currentUser, isLoading, fetchUserInfo } = useUserStore();
+
+  useEffect(() => {
+    const unSub = onAuthStateChanged(auth, (user) => {
+      console.log(user);
+      fetchUserInfo(user.uid);
+    })
+    return () => {
+      unSub();
+    };
+  }, [fetchUserInfo]);
+
+  if (isLoading) {
+    return <div className="text-center user-loading">
+      <img src={loading} alt="Loading..." className="loading-gif" width={40} />
+    </div>
+  }
+
   return (
-    <div className="App">
-      <div className="d-flex">
-        {user ? (
+    <>
+      <div className="App">
+        <div className="d-flex">
+          {currentUser ? (
             <>
               <div className="item-1"><List /></div>
               <div className="item-2"><Chats /></div>
               <div className="item-3"><Details /></div>
             </>) :
-          (
-              <Signup/>
-          )}
-          <Notification/>
+            (
+              <>
+                <LoadingBar color='#f11946' progress={progress} height={4} />
+                <Signup setProgress={setProgress} />
+              </>
+            )}
+          <Notification />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

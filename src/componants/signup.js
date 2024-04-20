@@ -2,16 +2,15 @@
 import React, { useState } from 'react';
 import selectedImg from '../images/avatar.jpg';
 import { toast } from 'react-toastify';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import upload from '../lib/upload';
 
-function Signup() {
+function Signup(props) {
     const [login_creds, setLoginCreds] = useState({ username: "", email: "" });
     const [signup_creds, setSignupCreds] = useState({ username: "", email: "", password: "" });
     const [loading, setLoading] = useState(false);
-    
     const [avatar, setAvatar] = useState({
         file: null,
         url: selectedImg
@@ -39,7 +38,30 @@ function Signup() {
         setSignupCreds({ ...signup_creds, [e.target.name]: e.target.value })          //to keep default value
     }
 
-    const handleLoginClick = (e) => {
+    const handleLoginClick = async(e) => {
+        e.preventDefault();
+        setLoading(true);
+        props.setProgress(10);
+        if (login_creds.password.length >= 6) {
+            try {
+                props.setProgress(30);
+                await signInWithEmailAndPassword(auth, login_creds.email, login_creds.password);
+                props.setProgress(75);
+                toast.success("Login Successfully");
+                props.setProgress(100);
+            }
+            catch (err) {
+                toast.error(err.message);
+            }
+            finally{
+                setLoading(false);
+            }
+        }
+        else {
+            toast.error("Password must be 6 Character Long");
+            setLoading(false);
+            return 0;
+        }
     }
 
     const handleSignupClick = async (e) => {
@@ -47,8 +69,11 @@ function Signup() {
         setLoading(true);
         if (signup_creds.password.length >= 6) {
             try {
+                props.setProgress(10);
                 const imgUrl= await upload(avatar.file);
+                props.setProgress(30);
                 const res = await createUserWithEmailAndPassword(auth, signup_creds.email, signup_creds.password);
+                props.setProgress(50);
                 await setDoc(doc(db, "users", res.user.uid), {
                     id: res.user.uid,
                     username: signup_creds.username,
@@ -56,9 +81,11 @@ function Signup() {
                     avatar:imgUrl,
                     blocked: [],
                 });
+                props.setProgress(70);
                 await setDoc(doc(db, "user-chats", res.user.uid), {
                     chats: [],
                 });
+                props.setProgress(100);
                 toast.success("Account Created Successfully");
             }
             catch (err) {

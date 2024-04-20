@@ -24,7 +24,7 @@ function Chats() {
           <img srcSet={avatarImage} className='top-chat-img' alt="" />
         </div>
         <div className="chat-item-detail m-3 w-75">
-          <h5>Lokesh</h5>
+          <h5>Abc Def</h5>
           <p>Last seen 10 min ago</p>
         </div>
         <div className='chat-item-icons'>
@@ -34,7 +34,7 @@ function Chats() {
       <div className="mid-level pb-2">
 
         <div className="msg">
-          <img srcSet={avatarImage} className='msg-avatar-img m-2' alt="" />
+          <img srcSet={avatarImage} className='msg-avatar-img m-1' alt="" />
           <div className="msg-text mx-2">
             <p className='msg-text-p'>Oh, the ending! It caught me completely off guard. I won't spoil it for you, but let's just say I had to take a moment to process everything. It was intense!</p>
             <span className='msg-timestamp'>1 min ago</span>
@@ -50,7 +50,7 @@ function Chats() {
         </div>
 
         <div className="msg">
-          <img srcSet={avatarImage} className='msg-avatar-img m-2' alt="" />
+          <img srcSet={avatarImage} className='msg-avatar-img m-1' alt="" />
           <div className="msg-text mx-2">
             <p className='msg-text-p'>Same here, work has been keeping me on my toes. But hey, I finally managed to finish that book you recommended, and oh boy, it was a rollercoaster!</p>
             <span className='msg-timestamp'>1 min ago</span>

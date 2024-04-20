@@ -17,7 +17,7 @@ function Details() {
           <img srcSet={avatarImage} alt="Chat Avatar" className='details-chat-avatar' />
         </div>
         <div className="div-chat-avatar d-flex justify-content-center mt-1">
-          <h3 className=''>Lokesh chaudhary</h3>
+          <h3 className=''>Abc Def </h3>
         </div>
         <div className="div-chat-avatar d-flex justify-content-center">
           <p>hello i am under the water please help</p>

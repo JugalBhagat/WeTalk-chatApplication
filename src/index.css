@@ -233,7 +233,7 @@ i:hover {
 .details-chat-avatar {
   width: 120px;
   height: 120px;
-  background-color: black;
+  background-color: rgb(255, 255, 255);
   border-radius: 50%;
 }
 
@@ -371,4 +371,16 @@ i:hover {
     cursor: not-allowed !important;
     background-color:#007bff6a;
   }
+}
+.user-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.603); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure the loading div appears above other content */
 }

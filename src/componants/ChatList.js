@@ -29,7 +29,7 @@ function ChatList() {
                     <div className="d-flex align-items-center mx-3">
                         <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
                         <div className=''>
-                            <b><p>Lokesh</p></b>
+                            <b><p>Abc Def</p></b>
                             <p>Hello</p>
                         </div>
                     </div>
@@ -38,7 +38,7 @@ function ChatList() {
                     <div className="d-flex align-items-center mx-3">
                         <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
                         <div className=''>
-                            <b><p>Lokesh</p></b>
+                            <b><p>Abc Def</p></b>
                             <p>Hello</p>
                         </div>
                     </div>
@@ -47,7 +47,7 @@ function ChatList() {
                     <div className="d-flex align-items-center mx-3">
                         <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
                         <div className=''>
-                            <b><p>Lokesh</p></b>
+                            <b><p>Abc Def</p></b>
                             <p>Hello</p>
                         </div>
                     </div>
@@ -56,7 +56,7 @@ function ChatList() {
                     <div className="d-flex align-items-center mx-3">
                         <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
                         <div className=''>
-                            <b><p>Lokesh</p></b>
+                            <b><p>Abc Def</p></b>
                             <p>Hello</p>
                         </div>
                     </div>
@@ -65,7 +65,7 @@ function ChatList() {
                     <div className="d-flex align-items-center mx-3">
                         <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
                         <div className=''>
-                            <b><p>Lokesh</p></b>
+                            <b><p>Abc Def</p></b>
                             <p>Hello</p>
                         </div>
                     </div>
@@ -74,7 +74,7 @@ function ChatList() {
                     <div className="d-flex align-items-center mx-3">
                         <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
                         <div className=''>
-                            <b><p>Lokesh</p></b>
+                            <b><p>Abc Def</p></b>
                             <p>Hello</p>
                         </div>
                     </div>
@@ -83,7 +83,7 @@ function ChatList() {
                     <div className="d-flex align-items-center mx-3">
                         <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
                         <div className=''>
-                            <b><p>Lokesh</p></b>
+                            <b><p>Abc Def</p></b>
                             <p>Hello</p>
                         </div>
                     </div>
@@ -92,7 +92,7 @@ function ChatList() {
                     <div className="d-flex align-items-center mx-3">
                         <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
                         <div className=''>
-                            <b><p>Lokesh</p></b>
+                            <b><p>Abc Def</p></b>
                             <p>Hello</p>
                         </div>
                     </div>

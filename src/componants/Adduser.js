@@ -14,21 +14,21 @@ function Adduser() {
                 <div className="d-flex align-items-center justify-content-between mt-3">
                     <div className="d-flex justify-content-center align-items-center">
                         <img srcSet={demoImg} alt='' className='chat-avatar' />
-                        <h6 className='mx-2'>Lokesh</h6>
+                        <h6 className='mx-2'>Abc Def</h6>
                     </div>
                     <button type="submit" className="btn btn-sm btn-outline-primary">Add</button>
                 </div>
                 <div className="d-flex align-items-center justify-content-between mt-3">
                     <div className="d-flex justify-content-center align-items-center">
                         <img srcSet={demoImg} alt='' className='chat-avatar' />
-                        <h6 className='mx-2'>Lokesh</h6>
+                        <h6 className='mx-2'>Abc Def</h6>
                     </div>
                     <button type="submit" className="btn btn-sm btn-outline-primary">Add</button>
                 </div>
                 <div className="d-flex align-items-center justify-content-between mt-3">
                     <div className="d-flex justify-content-center align-items-center">
                         <img srcSet={demoImg} alt='' className='chat-avatar' />
-                        <h6 className='mx-2'>Lokesh</h6>
+                        <h6 className='mx-2'>Abc Def</h6>
                     </div>
                     <button type="submit" className="btn btn-sm btn-outline-primary">Add</button>
                 </div>
