@@ -366,3 +366,9 @@ i:hover {
   background-color: white;
   color: black;
 }
+.btn{
+  &:disabled{
+    cursor: not-allowed !important;
+    background-color:#007bff6a;
+  }
+}
