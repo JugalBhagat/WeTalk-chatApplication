@@ -3,7 +3,7 @@ import { useState } from 'react';
 import avatarImage from '../images/avatar3.png';
 import AddUser from '../componants/Adduser';
 import useUserStore from '../lib/userStore';
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from '../lib/firebase';
 
 function ChatList() {
@@ -15,9 +15,18 @@ function ChatList() {
 
     useEffect(() => {
 
-        const unSub = onSnapshot(doc(db, "user-chats", currentUser.id), (doc) => {
-            setChats(doc.data());
-            console.log(chats);
+        const unSub = onSnapshot(doc(db, "user-chats", currentUser.id), async(res) => {
+            const items = res.data().chats;
+            console.log(items);
+            const promises = items.map(async (item) => {
+                const userDocRef = doc(db, "users", item.receiverId);
+                const userDocSnap = await getDoc(userDocRef);
+                const user = userDocSnap.data();
+
+                return { ...item, user };
+            });
+            const chatData = await Promise.all(promises);
+            setChats(chatData.sort((a,b)=>b.updatedAt - a.updatedAt));
         });
         return () => {
             unSub();
@@ -44,17 +53,17 @@ function ChatList() {
             </div>
 
             <div className="componant-1 mt-4">
-                {/* {chats.map((chat) => (
+                {chats.map((chat) => (
                     <div className='my-chat-item p-2' key={chat.chatId}>
                         <div className="d-flex align-items-center mx-3">
-                            <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
+                            <img className='chat-avatar mx-3' srcSet={chat.user.avatar ||avatarImage} alt="avatar" />
                             <div className=''>
-                                <b><p>Abc Def</p></b>
-                                <p>Hello</p>
+                                <b><p>{chat.user.username}</p></b>
+                                <p>{chat.lastMessage}</p>
                             </div>
                         </div>
                     </div>
-                ))} */}
+                ))}
 
                 {addMode && <AddUser />}
             </div>
