@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import avatarImage from '../images/avatar3.png';
 import SharedImage from '../images/bg.jpg';
+import { auth } from '../lib/firebase';
+import { toast } from 'react-toastify';
 
 function Details() {
   const [sharedImage, setSharedImage] = useState(false);
@@ -67,7 +69,10 @@ function Details() {
         <div className="buttons mt-4 m-3">       {/* Block Button */}
           <div className="d-grid gap-2 m-2">
             <button className="btn btn-danger" type="button">Block User</button>
-            <button className="btn btn-danger" type="button">Logout</button>
+            <button className="btn btn-danger" type="button" onClick={()=>{
+              auth.signOut();
+              toast.success("Logout successfull");
+            }} >Logout</button>
           </div>
         </div>
 

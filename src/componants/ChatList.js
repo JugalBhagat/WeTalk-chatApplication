@@ -1,18 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import avatarImage from '../images/avatar3.png';
 import AddUser from '../componants/Adduser';
+import useUserStore from '../lib/userStore';
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from '../lib/firebase';
 
 function ChatList() {
     const [addMode, setMode] = useState(false);
+    // eslint-disable-next-line 
+    const [chats, setChats] = useState([]);
+
+    const { currentUser } = useUserStore();
+
+    useEffect(() => {
+
+        const unSub = onSnapshot(doc(db, "user-chats", currentUser.id), (doc) => {
+            setChats(doc.data());
+            console.log(chats);
+        });
+        return () => {
+            unSub();
+        }
+        // eslint-disable-next-line 
+    }, [currentUser.id]);
+
     const onAddClick = () => {
-        if (addMode){
+        if (addMode) {
             setMode(false);
         }
-        else if (addMode === false)
-        {
+        else if (addMode === false) {
             setMode(true);
-        }    
+        }
     }
     return (
         <>
@@ -25,79 +44,19 @@ function ChatList() {
             </div>
 
             <div className="componant-1 mt-4">
-                <div className='my-chat-item-top mt-4 p-2'>
-                    <div className="d-flex align-items-center mx-3">
-                        <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
-                        <div className=''>
-                            <b><p>Abc Def</p></b>
-                            <p>Hello</p>
+                {/* {chats.map((chat) => (
+                    <div className='my-chat-item p-2' key={chat.chatId}>
+                        <div className="d-flex align-items-center mx-3">
+                            <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
+                            <div className=''>
+                                <b><p>Abc Def</p></b>
+                                <p>Hello</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className='my-chat-item p-2'>
-                    <div className="d-flex align-items-center mx-3">
-                        <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
-                        <div className=''>
-                            <b><p>Abc Def</p></b>
-                            <p>Hello</p>
-                        </div>
-                    </div>
-                </div>
-                <div className='my-chat-item p-2'>
-                    <div className="d-flex align-items-center mx-3">
-                        <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
-                        <div className=''>
-                            <b><p>Abc Def</p></b>
-                            <p>Hello</p>
-                        </div>
-                    </div>
-                </div>
-                <div className='my-chat-item p-2'>
-                    <div className="d-flex align-items-center mx-3">
-                        <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
-                        <div className=''>
-                            <b><p>Abc Def</p></b>
-                            <p>Hello</p>
-                        </div>
-                    </div>
-                </div>
-                <div className='my-chat-item p-2'>
-                    <div className="d-flex align-items-center mx-3">
-                        <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
-                        <div className=''>
-                            <b><p>Abc Def</p></b>
-                            <p>Hello</p>
-                        </div>
-                    </div>
-                </div>
-                <div className='my-chat-item p-2'>
-                    <div className="d-flex align-items-center mx-3">
-                        <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
-                        <div className=''>
-                            <b><p>Abc Def</p></b>
-                            <p>Hello</p>
-                        </div>
-                    </div>
-                </div>
-                <div className='my-chat-item p-2'>
-                    <div className="d-flex align-items-center mx-3">
-                        <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
-                        <div className=''>
-                            <b><p>Abc Def</p></b>
-                            <p>Hello</p>
-                        </div>
-                    </div>
-                </div>
-                <div className='my-chat-item p-2'>
-                    <div className="d-flex align-items-center mx-3">
-                        <img className='chat-avatar mx-3' srcSet={avatarImage} alt="avatar" />
-                        <div className=''>
-                            <b><p>Abc Def</p></b>
-                            <p>Hello</p>
-                        </div>
-                    </div>
-                </div>
-                {addMode && <AddUser/>}
+                ))} */}
+
+                {addMode && <AddUser />}
             </div>
         </>
     )
