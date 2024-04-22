@@ -3,9 +3,10 @@ import { useState } from 'react';
 import avatarImage from '../images/avatar3.png';
 import AddUser from '../componants/Adduser';
 import useUserStore from '../lib/userStore';
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from '../lib/firebase';
 import useChatStore from '../lib/chatStore';
+import { toast } from 'react-toastify';
 
 function ChatList() {
     const [addMode, setMode] = useState(false);
@@ -17,7 +18,7 @@ function ChatList() {
 
     useEffect(() => {
 
-        const unSub = onSnapshot(doc(db, "user-chats", currentUser.id), async(res) => {
+        const unSub = onSnapshot(doc(db, "user-chats", currentUser.id), async (res) => {
             const items = res.data().chats;
             console.log(items);
             const promises = items.map(async (item) => {
@@ -28,7 +29,7 @@ function ChatList() {
                 return { ...item, user };
             });
             const chatData = await Promise.all(promises);
-            setChats(chatData.sort((a,b)=>b.updatedAt - a.updatedAt));
+            setChats(chatData.sort((a, b) => b.updatedAt - a.updatedAt));
         });
         return () => {
             unSub();
@@ -44,8 +45,23 @@ function ChatList() {
             setMode(true);
         }
     }
-    const handleSelect=async(chat)=>{
-        changeChat(chat.chatId,chat.user);
+    const handleSelect = async (chat) => {
+        const userChats = chats.map(item => {
+            const { user, ...rest } = item;
+            return rest;
+        });
+        const chatIndex = userChats.findIndex(item => item.chatId === chat.chatId)
+        userChats[chatIndex].isSeen = true;
+        const userChatRef = doc(db, "user-chats", currentUser.id);
+        try {
+            await updateDoc(userChatRef, {
+                chats: userChats,
+            });
+            changeChat(chat.chatId, chat.user);               // select chat to display in chat window
+        } catch (err) {
+            console.log(err);
+            toast.error("Something went wrong!!! " + err)
+        }
     }
     return (
         <>
@@ -59,9 +75,9 @@ function ChatList() {
 
             <div className="componant-1 mt-4">
                 {chats.map((chat) => (
-                    <div className='my-chat-item p-2' key={chat.chatId} onClick={()=>handleSelect(chat)}>
+                    <div className='my-chat-item p-2' key={chat.chatId} onClick={() => handleSelect(chat)} style={{ backgroundColor: chat.isSeen === true ? "transparent" : "blue" }}  >
                         <div className="d-flex align-items-center mx-3">
-                            <img className='chat-avatar mx-3' srcSet={chat.user.avatar ||avatarImage} alt="avatar" />
+                            <img className='chat-avatar mx-3' srcSet={chat.user.avatar || avatarImage} alt="avatar" />
                             <div className=''>
                                 <b><p>{chat.user.username}</p></b>
                                 <p>{chat.lastMessage}</p>

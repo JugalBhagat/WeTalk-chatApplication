@@ -2,15 +2,17 @@ import React, { useEffect, useRef, useState } from 'react'
 import avatarImage from '../images/avatar3.png';
 import msg_img from '../images/bg.jpg';
 import EmojiPicker from 'emoji-picker-react';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { arrayUnion, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import useChatStore from '../lib/chatStore';
+import useUserStore from '../lib/userStore';
 
 function Chats() {
   const [emoji_mode, setemoji_mode] = useState(false);
   const [chat, setChat] = useState();
   const [text, setText] = useState("");
   const { chatId,user } = useChatStore();
+  const { currentUser } = useUserStore();
   const handleEmoji = (e) => {
     setText((prev) => prev + e.emoji);
     setemoji_mode(false);
@@ -32,8 +34,46 @@ function Chats() {
     }
   }, [chatId]);
 
-  console.log(chat);
-  console.log(user);
+  console.log(currentUser.id);
+  console.log(chat); // printing chat collection between currentUser and ChatUser
+  // console.log(user); // printing selected chat info
+
+  const handleSend=async()=>{
+    if(text==="") return;
+    try{
+      await updateDoc(doc(db,"chats",chatId),{
+        msg:arrayUnion({
+          senderId:currentUser.id,
+          text,
+          createdAt:new Date(),
+        })
+      });
+
+      const userIDs = [currentUser.id,user.id];
+
+      userIDs.forEach(async(uid)=>{
+
+        const userChatRef=doc(db,"user-chats",uid);
+        const userChatSnapshot = await getDoc(userChatRef);
+        if(userChatSnapshot.exists())
+        {
+          const userChatsData = userChatSnapshot.data();
+          console.log(userChatsData.chats);
+          const chatIndex = userChatsData.chats.findIndex(c => c.chatId === chatId);
+          userChatsData.chats[chatIndex].lastMessage = text;
+          userChatsData.chats[chatIndex].isSeen = uid === currentUser.id ? true : false;
+          userChatsData.chats[chatIndex].updatedAt = Date.now();
+          
+          await updateDoc(userChatRef,{
+            chats:userChatsData.chats,
+          });
+        }
+        
+      });
+    }catch(err){
+      console.log(err)
+    }
+  };
 
   return (
     <div className='position-relative'>
@@ -60,7 +100,8 @@ function Chats() {
         </div> */}
         {
         chat?.msg?.map((message)=>(
-          <div className="msg own" key={message?.createdAt}>
+
+          <div className={message.senderId === currentUser.id ? "msg own" : "msg"} key={message?.createdAt}>
           <div className="msg-text mx-2">
             {message.img && <img srcSet={msg_img} alt='' className='msg-img' />}
             <p className='msg-text-p'>{message.text}</p>
@@ -89,7 +130,7 @@ function Chats() {
             </div>
           </div>
           <div className='last-item'>
-            <button type="button" className="btn btn-primary mx-1">Send</button>
+            <button type="button" className="btn btn-primary mx-1" onClick={handleSend}>Send</button>
           </div>
         </div>
       </div>

@@ -52,6 +52,7 @@ function Signup(props) {
             }
             catch (err) {
                 toast.error(err.message);
+                props.setProgress(0);
             }
             finally{
                 setLoading(false);
@@ -60,6 +61,7 @@ function Signup(props) {
         else {
             toast.error("Password must be 6 Character Long");
             setLoading(false);
+            props.setProgress(0);
             return 0;
         }
     }
@@ -90,6 +92,7 @@ function Signup(props) {
             }
             catch (err) {
                 toast.error(err.message);
+                props.setProgress(0);
             }
             finally{
                 setLoading(false);
@@ -97,6 +100,7 @@ function Signup(props) {
         }
         else {
             toast.error("Password must be 6 Character Long");
+            props.setProgress(0);
             return 0;
         }
     }
