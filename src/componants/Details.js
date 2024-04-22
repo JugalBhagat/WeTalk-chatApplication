@@ -3,11 +3,13 @@ import avatarImage from '../images/avatar3.png';
 import SharedImage from '../images/bg.jpg';
 import { auth } from '../lib/firebase';
 import { toast } from 'react-toastify';
+import useChatStore from '../lib/chatStore';
 
 function Details() {
   const [sharedImage, setSharedImage] = useState(false);
   const [sharedFiles, setSharedFiles] = useState(false);
   const [ChatSetting, setChatSetting] = useState(false);
+  const { user } = useChatStore();
 
   const showSharedImage = () => {
     setSharedImage((prev) => !prev);
@@ -16,13 +18,10 @@ function Details() {
     <div className="">
       <div className='detail-top'>                {/* Detail Top Section */}
         <div className="div-chat-avatar d-flex justify-content-center mt-3">
-          <img srcSet={avatarImage} alt="Chat Avatar" className='details-chat-avatar' />
+          <img srcSet={user.avatar||avatarImage} alt="Chat Avatar" className='details-chat-avatar' />
         </div>
         <div className="div-chat-avatar d-flex justify-content-center mt-1">
-          <h3 className=''>Abc Def </h3>
-        </div>
-        <div className="div-chat-avatar d-flex justify-content-center">
-          <p>hello i am under the water please help</p>
+          <h3 className=''>{user.username}</h3>
         </div>
       </div>
       <div className="detail-bottom">

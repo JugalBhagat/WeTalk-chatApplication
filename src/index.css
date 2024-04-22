@@ -43,6 +43,7 @@ body {
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
+  cursor: pointer;
   /* Firefox */
   overflow-y: auto;
 }
@@ -89,6 +90,7 @@ body {
 
 .item-1 {
   border-left: 1px solid rgb(136, 136, 136);
+  border-right: 1px solid rgb(136, 136, 136);
   width: 23%;
 }
 

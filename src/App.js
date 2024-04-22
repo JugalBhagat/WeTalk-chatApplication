@@ -10,16 +10,19 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './lib/firebase';
 import useUserStore from './lib/userStore';
 import loading from './componants/loading.gif';
+import useChatStore from './lib/chatStore';
 
 function App() {
   const [progress, setProgress] = useState(0);
 
   const { currentUser, isLoading, fetchUserInfo } = useUserStore();
 
+  const { chatId } = useChatStore();
+
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, (user) => {
       console.log(user);
-      fetchUserInfo(user? user.uid : null);
+      fetchUserInfo(user ? user.uid : null);
     })
     return () => {
       unSub();
@@ -39,8 +42,8 @@ function App() {
           {currentUser ? (
             <>
               <div className="item-1"><List /></div>
-              <div className="item-2"><Chats /></div>
-              <div className="item-3"><Details /></div>
+              {chatId && <div className="item-2"><Chats /></div>}
+              {chatId && <div className="item-3"><Details /></div>}
             </>) :
             (
               <>

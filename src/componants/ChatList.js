@@ -5,6 +5,7 @@ import AddUser from '../componants/Adduser';
 import useUserStore from '../lib/userStore';
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from '../lib/firebase';
+import useChatStore from '../lib/chatStore';
 
 function ChatList() {
     const [addMode, setMode] = useState(false);
@@ -12,6 +13,7 @@ function ChatList() {
     const [chats, setChats] = useState([]);
 
     const { currentUser } = useUserStore();
+    const { changeChat } = useChatStore();
 
     useEffect(() => {
 
@@ -42,6 +44,9 @@ function ChatList() {
             setMode(true);
         }
     }
+    const handleSelect=async(chat)=>{
+        changeChat(chat.chatId,chat.user);
+    }
     return (
         <>
             <div className='d-flex align-items-center mx-4'>
@@ -54,7 +59,7 @@ function ChatList() {
 
             <div className="componant-1 mt-4">
                 {chats.map((chat) => (
-                    <div className='my-chat-item p-2' key={chat.chatId}>
+                    <div className='my-chat-item p-2' key={chat.chatId} onClick={()=>handleSelect(chat)}>
                         <div className="d-flex align-items-center mx-3">
                             <img className='chat-avatar mx-3' srcSet={chat.user.avatar ||avatarImage} alt="avatar" />
                             <div className=''>
