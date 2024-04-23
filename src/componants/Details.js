@@ -14,11 +14,22 @@ function Details() {
   const showSharedImage = () => {
     setSharedImage((prev) => !prev);
   }
+
+  const handleSignOut = () => {
+    auth.signOut()
+      .then(() => {
+        toast.success("Logout successful");
+      })
+      .catch((error) => {
+        console.error("Error during logout:", error);
+        toast.error("Logout failed");
+      });
+  }
   return (
     <div className="">
       <div className='detail-top'>                {/* Detail Top Section */}
         <div className="div-chat-avatar d-flex justify-content-center mt-3">
-          <img srcSet={user.avatar||avatarImage} alt="Chat Avatar" className='details-chat-avatar' />
+          <img srcSet={user.avatar || avatarImage} alt="Chat Avatar" className='details-chat-avatar' />
         </div>
         <div className="div-chat-avatar d-flex justify-content-center mt-1">
           <h3 className=''>{user.username}</h3>
@@ -68,16 +79,13 @@ function Details() {
         <div className="buttons mt-4 m-3">       {/* Block Button */}
           <div className="d-grid gap-2 m-2">
             <button className="btn btn-danger" type="button">Block User</button>
-            <button className="btn btn-danger" type="button" onClick={()=>{
-              auth.signOut();
-              toast.success("Logout successfull");
-            }} >Logout</button>
+            <button className="btn btn-danger logout-btn" type="button" onClick={handleSignOut} >Logout</button>
           </div>
         </div>
 
       </div>
     </div>
-  )
+  ) 
 }
 
 export default Details

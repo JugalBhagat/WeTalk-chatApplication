@@ -1,17 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react'
 import avatarImage from '../images/avatar3.png';
-import msg_img from '../images/bg.jpg';
 import EmojiPicker from 'emoji-picker-react';
 import { arrayUnion, doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import useChatStore from '../lib/chatStore';
 import useUserStore from '../lib/userStore';
+import upload from '../lib/upload';
 
 function Chats() {
   const [emoji_mode, setemoji_mode] = useState(false);
   const [chat, setChat] = useState();
   const [text, setText] = useState("");
-  const { chatId,user } = useChatStore();
+  const [img, setImg] = useState({
+    file: null,
+    url: "",
+  });
+  const { chatId, user } = useChatStore();
   const { currentUser } = useUserStore();
   const handleEmoji = (e) => {
     setText((prev) => prev + e.emoji);
@@ -21,7 +25,8 @@ function Chats() {
   const endRef = useRef(null);
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" })
-  }, [])
+  }, [chat])
+
 
   useEffect(() => {
     const unSub = onSnapshot(
@@ -38,41 +43,66 @@ function Chats() {
   console.log(chat); // printing chat collection between currentUser and ChatUser
   // console.log(user); // printing selected chat info
 
-  const handleSend=async()=>{
-    if(text==="") return;
-    try{
-      await updateDoc(doc(db,"chats",chatId),{
-        msg:arrayUnion({
-          senderId:currentUser.id,
+  const handleImg = (e) => {
+    if (e.target.files[0]) {
+      setImg({
+        file: e.target.files[0],
+        url: URL.createObjectURL(e.target.files[0])
+      })
+    }
+    else {
+      setImg({
+        file: null,
+        url: ""
+      })
+    }
+  };
+
+  const handleSend = async () => {
+    if (text === "") return;
+
+    try {
+      let imgUrl = null;
+      if (img.file) {
+        imgUrl = await upload(img.file);
+        console.log("img url : " + imgUrl);
+      }
+
+      await updateDoc(doc(db, "chats", chatId), {
+        msg: arrayUnion({
+          senderId: currentUser.id,
           text,
-          createdAt:new Date(),
+          createdAt: new Date(),
+          ...(imgUrl && { img: imgUrl }),
         })
       });
 
-      const userIDs = [currentUser.id,user.id];
+      const userIDs = [currentUser.id, user.id];
 
-      userIDs.forEach(async(uid)=>{
-
-        const userChatRef=doc(db,"user-chats",uid);
+      userIDs.forEach(async (uid) => {
+        const userChatRef = doc(db, "user-chats", uid);
         const userChatSnapshot = await getDoc(userChatRef);
-        if(userChatSnapshot.exists())
-        {
+        if (userChatSnapshot.exists()) {
           const userChatsData = userChatSnapshot.data();
           console.log(userChatsData.chats);
           const chatIndex = userChatsData.chats.findIndex(c => c.chatId === chatId);
           userChatsData.chats[chatIndex].lastMessage = text;
           userChatsData.chats[chatIndex].isSeen = uid === currentUser.id ? true : false;
           userChatsData.chats[chatIndex].updatedAt = Date.now();
-          
-          await updateDoc(userChatRef,{
-            chats:userChatsData.chats,
+
+          await updateDoc(userChatRef, {
+            chats: userChatsData.chats,
           });
         }
-        
       });
-    }catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log("Error : " + err);
     }
+    setText("");
+    setImg({
+      file: null,
+      url: ""
+    });
   };
 
   return (
@@ -90,34 +120,34 @@ function Chats() {
         </div>
       </div>
       <div className="mid-level pb-2">
-
-        {/* <div className="msg">
-          <img srcSet={avatarImage} className='msg-avatar-img m-1' alt="" />
-          <div className="msg-text mx-2">
-            <p className='msg-text-p'>Oh, the ending! It caught me completely off guard. I won't spoil it for you, but let's just say I had to take a moment to process everything. It was intense!</p>
-            <span className='msg-timestamp'>1 min ago</span>
-          </div>
-        </div> */}
         {
-        chat?.msg?.map((message)=>(
+          chat?.msg?.map((message) => (
+            <div className={message.senderId === currentUser.id ? "msg own" : "msg"} key={message?.createdAt}>
+              <div className="msg-text mx-2">
+                {message.img && <img srcSet={message.img} alt='' className='msg-img' />}
+                <p className='msg-text-p'>{message.text}</p>
+                {/* <span className='msg-timestamp'>1 min ago</span> */}
+              </div>
+            </div>
+          ))
+        }
 
-          <div className={message.senderId === currentUser.id ? "msg own" : "msg"} key={message?.createdAt}>
-          <div className="msg-text mx-2">
-            {message.img && <img srcSet={msg_img} alt='' className='msg-img' />}
-            <p className='msg-text-p'>{message.text}</p>
-            {/* <span className='msg-timestamp'>1 min ago</span> */}
+        {img.url && <div className='msg own'>
+          <div className="msg-text">
+            <img src={img.url} className='msg-img' alt="" />
           </div>
         </div>
-        ))
         }
-        
 
         <div ref={endRef}></div>
       </div>
       <div className="bottom-level pt-2">
         <div className="m-3 d-flex align-items-center position-relative">
           <div className="icons mx-1">
-            <i className="fa-regular fa-image mx-1"></i>
+            <label htmlFor='file' >
+              <i className="fa-regular fa-image mx-1" ></i>
+            </label>
+            <input type='file' id="file" style={{ display: "none" }} onChange={handleImg} />
             <i className="fa-solid fa-video mx-2"></i>
             <i className="fa-solid fa-face-smile mx-1" onClick={() => { setemoji_mode(prev => !prev) }}></i>
             <div className="emoji-container">

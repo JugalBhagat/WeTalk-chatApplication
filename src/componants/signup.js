@@ -51,12 +51,13 @@ function Signup(props) {
                 props.setProgress(100);
             }
             catch (err) {
-                toast.error(err.message);
+                toast.error("erro : "+err.message);
                 props.setProgress(0);
             }
             finally{
                 setLoading(false);
             }
+            props.setProgress(0);
         }
         else {
             toast.error("Password must be 6 Character Long");
@@ -118,8 +119,8 @@ function Signup(props) {
                         </div>
                         <div className="mb-3 my-signup-input-box" >
                             {/* <label className='my-signup-input form-control' htmlFor='file'>Select Avatar Image</label> */}
-                            {/* <input type="file" class="form-control my-signup-input" id="file" style={{display:'none'}} /> */}
-                            <input type="file" class="form-control my-signup-input" id="file" onChange={handleFileOnchange} />
+                            {/* <input type="file" className="form-control my-signup-input" id="file" style={{display:'none'}} /> */}
+                            <input type="file" className="form-control my-signup-input" id="file" onChange={handleFileOnchange} />
                         </div>
                         <div className="mb-3 my-signup-input-box">
                             <input type="text" className="my-signup-input " id="username" name="username" onChange={SignupOnChange} placeholder="Username" />
@@ -129,9 +130,6 @@ function Signup(props) {
                         </div>
                         <div className="mb-3 my-signup-input-box">
                             <input type="password" className="my-signup-input" id="password" name="password" onChange={SignupOnChange} placeholder="Password" />
-                        </div>
-                        <div>
-                            <p className="">Already have an account?</p>
                         </div>
                         <button type="submit" className="btn btn-primary mt-3" disabled={loading}>{loading ? 'Loading' : 'Sign Up'}</button>
                     </form>
@@ -147,9 +145,6 @@ function Signup(props) {
                         </div>
                         <div className="mb-3 my-signup-input-box">
                             <input type="password" className="my-signup-input" id="password" name="password" onChange={LoginOnChange} placeholder="Password" />
-                        </div>
-                        <div>
-                            <p className="">Already have an account?</p>
                         </div>
                         <button type="submit" className="btn btn-primary mt-3" disabled={loading}>{loading ? 'Loading' : 'Login'}</button>
                     </form>
