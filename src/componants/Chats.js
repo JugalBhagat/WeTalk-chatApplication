@@ -15,7 +15,7 @@ function Chats() {
     file: null,
     url: "",
   });
-  const { chatId, user } = useChatStore();
+  const { chatId, user,isCurrentUserBlock,isReceiverUserBlock  } = useChatStore();
   const { currentUser } = useUserStore();
   const handleEmoji = (e) => {
     setText((prev) => prev + e.emoji);
@@ -109,10 +109,10 @@ function Chats() {
     <div className='position-relative'>
       <div className="top-level  d-flex align-items-center">
         <div className="img m-3">
-          <img srcSet={user.avatar || avatarImage} className='top-chat-img' alt="" />
+          <img srcSet={user?.avatar || avatarImage} className='top-chat-img' alt="" />
         </div>
         <div className="chat-item-detail m-3 w-75">
-          <h5>{user.username}</h5>
+          <h5>{user?.username}</h5>
           <p>Last seen 10 min ago</p>
         </div>
         <div className='chat-item-icons'>
@@ -156,11 +156,11 @@ function Chats() {
           </div>
           <div className='input-box mx-1'>
             <div className="my-input-box d-flex align-items-center">
-              <input type="text" className='txt-my-chat mx-2' placeholder='Type message here....' value={text} onChange={e => setText(e.target.value)} />
+              <input type="text" className='txt-my-chat mx-2' disabled={isCurrentUserBlock || isReceiverUserBlock} value={text} onChange={e => setText(e.target.value)} placeholder={isCurrentUserBlock || isReceiverUserBlock ? 'You can not send message' : 'Type message here....'} />
             </div>
           </div>
           <div className='last-item'>
-            <button type="button" className="btn btn-primary mx-1" onClick={handleSend}>Send</button>
+            <button type="button" className="btn btn-primary mx-1" onClick={handleSend} disabled={isCurrentUserBlock || isReceiverUserBlock} >Send</button>
           </div>
         </div>
       </div>

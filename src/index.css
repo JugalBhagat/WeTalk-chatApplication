@@ -136,6 +136,7 @@ i:hover {
   width: 400px;
   outline: none;
   color: white;
+  
 }
 
 .my-input-box {
@@ -143,6 +144,10 @@ i:hover {
   border-radius: 10px;
   height: 40px;
   width: 480px;
+  &:disabled{
+    background-color: #007bff6a;
+    cursor: not-allowed;
+  }
 }
 
 .last-item {
