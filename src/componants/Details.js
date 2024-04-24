@@ -12,7 +12,7 @@ function Details() {
   const [sharedFiles, setSharedFiles] = useState(false);
   const [ChatSetting, setChatSetting] = useState(false);
 
-  const { user,chatId,isCurrentUserBlock,changeBlock,isReceiverUserBlock } = useChatStore();
+  const { user,isCurrentUserBlock,changeBlock,isReceiverUserBlock } = useChatStore();
   const { currentUser } = useUserStore();
 
   const handleBlock =async()=>{
@@ -37,7 +37,7 @@ function Details() {
           <img srcSet={user?.avatar || avatarImage} alt="Chat Avatar" className='details-chat-avatar' />
         </div>
         <div className="div-chat-avatar d-flex justify-content-center mt-1">
-          <h3 className=''>{user?.username}</h3>
+          <h3 className=''>{user?.username || 'Wetalk User'}</h3>
         </div>
       </div>
       <div className="detail-bottom">

@@ -12,12 +12,12 @@ function ChatList() {
     const [addMode, setMode] = useState(false);
     // eslint-disable-next-line 
     const [chats, setChats] = useState([]);
+    const [searchInput, setSearchInput] = useState("");
 
     const { currentUser } = useUserStore();
     const { changeChat } = useChatStore();
 
     useEffect(() => {
-
         const unSub = onSnapshot(doc(db, "user-chats", currentUser.id), async (res) => {
             const items = res.data().chats;
             console.log(items);
@@ -45,6 +45,9 @@ function ChatList() {
             setMode(true);
         }
     }
+
+    const filterChats = chats.filter(c=>c.user.username.toLowerCase().includes(searchInput.toLowerCase()))
+
     const handleSelect = async (chat) => {
         const userChats = chats.map(item => {
             const { user, ...rest } = item;
@@ -68,19 +71,19 @@ function ChatList() {
             <div className='d-flex align-items-center mx-4'>
                 <div className="top-bar d-flex mx-1 my-serachbar align-items-center">
                     <i className="fa-solid fa-magnifying-glass mx-2"></i>
-                    <input type='text' name='txt_search' className="my-serach" />
+                    <input type='text' name='txt_search' className="my-serach" onChange={(e)=>setSearchInput(e.target.value)} />
                 </div>
                 <i className={`fa-solid btn-add ${addMode ? 'fa-minus' : 'fa-plus'} mx-2 btn-add-chats`} onClick={onAddClick}></i>
             </div>
 
             <div className="componant-1 mt-4">
-                {chats.map((chat) => (
+                {filterChats.map((chat) => (
                     <div className='my-chat-item p-2' key={chat.chatId} onClick={() => handleSelect(chat)} style={{ backgroundColor: chat.isSeen === true ? "transparent" : "blue" }}  >
                         <div className="d-flex align-items-center mx-3">
-                            <img className='chat-avatar mx-3' srcSet={chat.user.avatar || avatarImage} alt="avatar" />
+                            <img className='chat-avatar mx-3' srcSet={chat.user.blocked.includes(currentUser.id) ? avatarImage : chat.user.avatar || avatarImage } alt="avatar" />
                             <div className=''>
-                                <b><p>{chat.user.username}</p></b>
-                                <p>{chat.lastMessage}</p>
+                                <b><p>{chat.user.blocked.includes(currentUser.id) ? 'Wetalk User' : chat.user.username}</p></b>
+                                <p>{chat.user.blocked.includes(currentUser.id) ? 'Blocked' :chat.lastMessage}</p>
                             </div>
                         </div>
                     </div>

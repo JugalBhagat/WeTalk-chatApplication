@@ -112,7 +112,7 @@ function Chats() {
           <img srcSet={user?.avatar || avatarImage} className='top-chat-img' alt="" />
         </div>
         <div className="chat-item-detail m-3 w-75">
-          <h5>{user?.username}</h5>
+          <h5>{user?.username || 'Wetalk User'}</h5>
           <p>Last seen 10 min ago</p>
         </div>
         <div className='chat-item-icons'>
